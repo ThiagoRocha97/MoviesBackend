@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "rdy4077+GWRAvckD8Yv74DXAxYt4TsuTKbRSe59aimU=",
+  "Source": "MoviesBackendAPI",
+  "BasePath": "_content/MoviesBackendAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
