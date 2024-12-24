@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Interfaces
+namespace Domain.Interfaces.IRepositories
 {
-	public interface IGetGenresUseCase
+	public interface IGenresRepository : IBaseRepository<Genres>
 	{
-		Task<List<Genres>> Execute();
 	}
 }

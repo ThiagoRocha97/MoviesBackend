@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Interfaces;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,20 +9,29 @@ namespace MoviesBackendAPI.Controllers
 	[ApiController]
 	public class GenresController : ControllerBase
 	{
+		private readonly IAddGenresUseCase _addGenresUseCase;
+		private readonly IGetGenresUseCase _getGenresUseCase;
+
+		public GenresController(IAddGenresUseCase addGenresUseCase, IGetGenresUseCase getGenresUseCase)
+		{
+			_addGenresUseCase = addGenresUseCase;
+			_getGenresUseCase = getGenresUseCase;
+		}
 		/// <summary>
 		/// Gets a list of genres
 		/// </summary>
 		[HttpGet]
-		public IActionResult Get() 
+		public async Task<IActionResult> Get() 
 		{
+			var list = await _getGenresUseCase.Execute();
 			return Ok();
 		}
 
 		///<summary>
 		/// Gets one specific genre
 		/// </summary>
-		[HttpGet]
-		public IActionResult GetById(int id) 
+		[HttpGet("{id}", Name = "GetGenreById")]
+		public async Task<IActionResult> GetGenreById(int id) 
 		{
 			return Ok();
 		}
@@ -30,9 +40,11 @@ namespace MoviesBackendAPI.Controllers
 		/// Create new Genre
 		/// </summary>
 		[HttpPost]
-		public IActionResult Create(Genres genres)
+		public async Task<IActionResult> Create(Genres genres)
 		{
-			return Created();
+			await _addGenresUseCase.Execute(genres);
+
+			return CreatedAtRoute("GetGenreById", new {id = genres.Id});
 		}
 
 		///<summary>

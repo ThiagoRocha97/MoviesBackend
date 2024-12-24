@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-	public interface IGetGenresUseCase
+	public interface IAddGenresUseCase
 	{
-		Task<List<Genres>> Execute();
+		Task Execute(Genres genres);
 	}
 }
