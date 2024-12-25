@@ -11,12 +11,18 @@ namespace MoviesBackendAPI.Controllers
 	{
 		private readonly IAddGenresUseCase _addGenresUseCase;
 		private readonly IGetGenresUseCase _getGenresUseCase;
+		private readonly IGetGenreByIdUseCase _getGenreByIdUseCase;
 
-		public GenresController(IAddGenresUseCase addGenresUseCase, IGetGenresUseCase getGenresUseCase)
+		public GenresController(
+			IAddGenresUseCase addGenresUseCase, 
+			IGetGenresUseCase getGenresUseCase, 
+			IGetGenreByIdUseCase getGenreByIdUseCase)
 		{
 			_addGenresUseCase = addGenresUseCase;
 			_getGenresUseCase = getGenresUseCase;
+			_getGenreByIdUseCase = getGenreByIdUseCase;
 		}
+
 		/// <summary>
 		/// Gets a list of genres
 		/// </summary>
@@ -33,6 +39,7 @@ namespace MoviesBackendAPI.Controllers
 		[HttpGet("{id}", Name = "GetGenreById")]
 		public async Task<IActionResult> GetGenreById(int id) 
 		{
+			var genre = await _getGenreByIdUseCase.Execute(id);
 			return Ok();
 		}
 

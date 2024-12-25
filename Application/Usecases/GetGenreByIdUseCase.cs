@@ -4,18 +4,18 @@ using Domain.Interfaces.IRepositories;
 
 namespace Application.Usecases
 {
-	public class AddGenresUseCase : IAddGenresUseCase
+	public class GetGenreByIdUseCase : IGetGenreByIdUseCase
 	{
 		private readonly IGenresRepository _genresRepository;
 
-		public AddGenresUseCase(IGenresRepository genresRepository)
+		public GetGenreByIdUseCase(IGenresRepository genresRepository)
 		{
 			_genresRepository = genresRepository;
 		}
 
-		public async Task Execute(Genres genres)
+		public async Task<Genres?> Execute(int Id)
 		{
-			await _genresRepository.Add(genres);
+			return await _genresRepository.GetById(Id);
 		}
 	}
 }

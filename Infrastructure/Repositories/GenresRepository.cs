@@ -2,11 +2,6 @@
 using Domain.Interfaces.IRepositories;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
@@ -14,14 +9,14 @@ namespace Infrastructure.Repositories
 	{
 		private readonly ApplicationDbContext _applicationDbContext;
 
-		public GenresRepository(ApplicationDbContext applicationDbContext) 
+		public GenresRepository(ApplicationDbContext applicationDbContext)
 		{
 			_applicationDbContext = applicationDbContext;
 		}
 
 		public async Task Add(Genres entity)
 		{
-			_applicationDbContext.Add(entity);
+			_applicationDbContext.Genres.Add(entity);
 			await _applicationDbContext.SaveChangesAsync();
 		}
 
@@ -36,9 +31,10 @@ namespace Infrastructure.Repositories
 			return list;
 		}
 
-		public Task<Genres> GetById(int id)
+		public async Task<Genres?> GetById(int id)
 		{
-			throw new NotImplementedException();
+			Genres? genre = await _applicationDbContext.Genres.FindAsync(id);
+			return genre;
 		}
 
 		public Task Update(Genres entity)
